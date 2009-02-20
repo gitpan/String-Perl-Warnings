@@ -1,11 +1,11 @@
 use strict;
 use warnings;
 use Test::More tests => 627;
-use_ok('String::Perl::Warnings', qw(is_warning));
+use_ok('String::Perl::Warnings', qw(not_warning));
 
 while(<DATA>){
   chomp;
-  ok( !is_warning($_), "Not Warning: '$_'" );
+  ok( not_warning($_), "Not Warning: '$_'" );
 }
 
 exit 0;
