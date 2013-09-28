@@ -1,14 +1,65 @@
+
 use strict;
-use inc::Module::Install;
-name 'String-Perl-Warnings';
-author 'Chris Williams <chris@bingosnet.co.uk>';
-version_from 'lib/String/Perl/Warnings.pm';
-abstract_from 'lib/String/Perl/Warnings.pm';
-license 'perl';
-auto_license holder => 'Chris Williams';
-perl_version '5.006';
-build_requires 'Test::More' => 0.47;
-requires 'Regexp::Assemble' => 0.34;
-auto_provides;
-githubmeta;
-WriteAll();
+use warnings;
+
+use 5.006;
+
+use ExtUtils::MakeMaker 6.30;
+
+
+
+my %WriteMakefileArgs = (
+  "ABSTRACT" => "Determine if a string looks like a perl warning",
+  "AUTHOR" => "Chris Williams <chris\@bingosnet.co.uk>",
+  "BUILD_REQUIRES" => {},
+  "CONFIGURE_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.30"
+  },
+  "DISTNAME" => "String-Perl-Warnings",
+  "EXE_FILES" => [],
+  "LICENSE" => "perl",
+  "NAME" => "String::Perl::Warnings",
+  "PREREQ_PM" => {
+    "Regexp::Assemble" => "0.34"
+  },
+  "TEST_REQUIRES" => {},
+  "VERSION" => "1.08",
+  "test" => {
+    "TESTS" => "t/*.t"
+  }
+);
+
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
+  my $tr = delete $WriteMakefileArgs{TEST_REQUIRES};
+  my $br = $WriteMakefileArgs{BUILD_REQUIRES};
+  for my $mod ( keys %$tr ) {
+    if ( exists $br->{$mod} ) {
+      $br->{$mod} = $tr->{$mod} if $tr->{$mod} > $br->{$mod};
+    }
+    else {
+      $br->{$mod} = $tr->{$mod};
+    }
+  }
+}
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
+  my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};
+  my $pp = $WriteMakefileArgs{PREREQ_PM};
+  for my $mod ( keys %$br ) {
+    if ( exists $pp->{$mod} ) {
+      $pp->{$mod} = $br->{$mod} if $br->{$mod} > $pp->{$mod};
+    }
+    else {
+      $pp->{$mod} = $br->{$mod};
+    }
+  }
+}
+
+delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
+  unless eval { ExtUtils::MakeMaker->VERSION(6.52) };
+
+WriteMakefile(%WriteMakefileArgs);
+
+
+
