@@ -18,4 +18,4 @@ requires:
 resources:
   homepage: https://github.com/bingos/string-perl-warnings
   repository: https://github.com/bingos/string-perl-warnings.git
-version: 1.08
+version: 1.10

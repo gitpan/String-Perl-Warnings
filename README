@@ -2,7 +2,7 @@ NAME
     String::Perl::Warnings - Determine if a string looks like a perl warning
 
 VERSION
-    version 1.08
+    version 1.10
 
 SYNOPSIS
       use String::Perl::Warnings qw(is_warning);
