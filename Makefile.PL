@@ -23,7 +23,7 @@ my %WriteMakefileArgs = (
     "Regexp::Assemble" => "0.34"
   },
   "TEST_REQUIRES" => {},
-  "VERSION" => "1.10",
+  "VERSION" => "1.12",
   "test" => {
     "TESTS" => "t/*.t"
   }
